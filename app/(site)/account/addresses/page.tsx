@@ -1,0 +1,2 @@
+import { requireUser } from "@/lib/auth-utils"; import { db } from "@/lib/db"
+export default async function Addresses(){ const s = await requireUser(); const addrs = await db.address.findMany({ where:{ userId:(s.user as any).id }}); return <div className="container py-16"><h1 className="font-display text-3xl mb-4">Addresses</h1><div className="text-muted-foreground text-sm">Address manager – model ready. UI scaffolded.</div><pre className="mt-4 text-xs bg-secondary p-4 rounded-xl">{JSON.stringify(addrs, null, 2)}</pre></div>}

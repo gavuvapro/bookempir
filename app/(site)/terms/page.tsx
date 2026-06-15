@@ -1,0 +1,1 @@
+export default function Page(){ return <div className="container py-16 prose-book max-w-3xl"><h1 className="font-display text-4xl capitalize">terms</h1><p>Premium bookstore policy content goes here. Replace with your own legal text before launch.</p></div>}

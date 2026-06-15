@@ -1,0 +1,1 @@
+export default function About(){ return <div className="container py-16 prose-book"><h1 className="font-display text-4xl">About Elena Vance</h1><p>Writer, designer, and teacher based in Portland. I write concise, practical books for creative people who want to do better work with less noise.</p><h3>Mission</h3><p>Make beautiful, useful books that respect your time.</p></div>}
