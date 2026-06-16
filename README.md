@@ -118,7 +118,7 @@ prisma/
 ## Deployment
 
 - **Vercel**: push repo, add env vars, set build command `prisma generate && next build`
-- **DB**: Supabase / Railway / Neon PostgreSQL – just set DATABASE_URL
+- **DB**: Neon PostgreSQL – just set DATABASE_URL and DIRECT_URL
 - **Stripe**: add webhook endpoint `/api/webhooks/stripe`
 - **Cloudinary**: add credentials for image uploads
 - **Resend**: add API key for transactional email
