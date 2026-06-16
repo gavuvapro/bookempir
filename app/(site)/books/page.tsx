@@ -4,13 +4,14 @@ import Link from "next/link"
 import { BookOpen, Search, SlidersHorizontal, ArrowLeft, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
-export default async function BooksPage({ searchParams }: { searchParams: { q?:string, category?:string, sort?:string, page?:string }}) {
-  const q = searchParams.q || ""
-  const categorySlug = searchParams.category
-  const page = parseInt(searchParams.page || "1")
+export default async function BooksPage({ searchParams }: { searchParams: Promise<{ q?:string, category?:string, sort?:string, page?:string }>}) {
+  const resolvedParams = await searchParams;
+  const q = resolvedParams.q || ""
+  const categorySlug = resolvedParams.category
+  const page = parseInt(resolvedParams.page || "1")
   const take = 12
   const where: any = { published: true, title: q? { contains: q, mode: "insensitive"}:undefined, category: categorySlug ? { slug: categorySlug } : undefined }
-  const orderBy = searchParams.sort === "price_asc" ? { price: "asc" as const } : searchParams.sort === "price_desc" ? { price: "desc" as const } : { createdAt: "desc" as const}
+  const orderBy = resolvedParams.sort === "price_asc" ? { price: "asc" as const } : resolvedParams.sort === "price_desc" ? { price: "desc" as const } : { createdAt: "desc" as const}
   const [books, total, categories] = await Promise.all([
     db.book.findMany({ where, orderBy, skip: (page-1)*take, take, include:{ category:true }}),
     db.book.count({ where }),
@@ -61,7 +62,7 @@ export default async function BooksPage({ searchParams }: { searchParams: { q?:s
           </div>
           <select
             name="sort"
-            defaultValue={searchParams.sort || ""}
+            defaultValue={resolvedParams.sort || ""}
             className="border rounded-full px-4 py-2.5 text-sm bg-background appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 transition-shadow"
           >
             <option value="newest">Newest</option>
@@ -97,7 +98,7 @@ export default async function BooksPage({ searchParams }: { searchParams: { q?:s
           <div className="flex items-center justify-center gap-3 mt-12">
             {page > 1 && (
               <Link
-                href={`/books?page=${page - 1}${categorySlug ? `&category=${categorySlug}` : ""}${searchParams.sort ? `&sort=${searchParams.sort}` : ""}${q ? `&q=${q}` : ""}`}
+                href={`/books?page=${page - 1}${categorySlug ? `&category=${categorySlug}` : ""}${resolvedParams.sort ? `&sort=${resolvedParams.sort}` : ""}${q ? `&q=${q}` : ""}`}
                 className="inline-flex items-center gap-1.5 text-sm rounded-full border px-4 py-2 hover:bg-accent transition-colors"
               >
                 <ArrowLeft size={14} />
@@ -109,7 +110,7 @@ export default async function BooksPage({ searchParams }: { searchParams: { q?:s
             </span>
             {page < totalPages && (
               <Link
-                href={`/books?page=${page + 1}${categorySlug ? `&category=${categorySlug}` : ""}${searchParams.sort ? `&sort=${searchParams.sort}` : ""}${q ? `&q=${q}` : ""}`}
+                href={`/books?page=${page + 1}${categorySlug ? `&category=${categorySlug}` : ""}${resolvedParams.sort ? `&sort=${resolvedParams.sort}` : ""}${q ? `&q=${q}` : ""}`}
                 className="inline-flex items-center gap-1.5 text-sm rounded-full border px-4 py-2 hover:bg-accent transition-colors"
               >
                 Next

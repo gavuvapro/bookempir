@@ -17,14 +17,16 @@ import {
 } from "lucide-react"
 import Link from "next/link"
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
-  const book = await db.book.findUnique({ where: { slug: params.slug } })
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const resolvedParams = await params;
+  const book = await db.book.findUnique({ where: { slug: resolvedParams.slug } })
   return { title: book?.title || "Book" }
 }
 
-export default async function BookPage({ params }: { params: { slug: string } }) {
+export default async function BookPage({ params }: { params: Promise<{ slug: string }> }) {
+  const resolvedParams = await params;
   const book = await db.book.findUnique({
-    where: { slug: params.slug },
+    where: { slug: resolvedParams.slug },
     include: {
       category: true,
       reviews: { where: { approved: true }, include: { user: true } },

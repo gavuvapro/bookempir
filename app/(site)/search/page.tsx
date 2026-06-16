@@ -3,8 +3,9 @@ import { BookCard } from "@/components/site/book-card"
 import Link from "next/link"
 import { Search as SearchIcon, BookOpen, PenLine } from "lucide-react"
 
-export default async function Search({ searchParams }: { searchParams: { q?: string } }) {
-  const q = searchParams.q || ""
+export default async function Search({ searchParams }: { searchParams: Promise<{ q?: string }> }) {
+  const resolvedParams = await searchParams;
+  const q = resolvedParams.q || ""
   const books = q
     ? await db.book.findMany({
         where: { title: { contains: q, mode: "insensitive" }, published: true },

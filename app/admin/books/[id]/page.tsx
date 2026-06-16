@@ -1,11 +1,12 @@
 import { db } from "@/lib/db"
 import { notFound, redirect } from "next/navigation"
-export default async function EditBook({ params }:{ params:{id:string}}){
-  const book = await db.book.findUnique({ where:{ id: params.id }})
-  if(!book) return notFound()
-  async function update(fd: FormData){
+export default async function EditBook({ params }: { params: Promise<{ id: string }> }) {
+  const resolvedParams = await params;
+  const book = await db.book.findUnique({ where: { id: resolvedParams.id } })
+  if (!book) return notFound()
+  async function update(fd: FormData) {
     "use server"
-    await db.book.update({ where:{ id: params.id }, data: { title: String(fd.get("title")), price: Number(fd.get("price")), stock: Number(fd.get("stock")) }})
+    await db.book.update({ where: { id: resolvedParams.id }, data: { title: String(fd.get("title")), price: Number(fd.get("price")), stock: Number(fd.get("stock")) } })
     redirect("/admin/books")
   }
   return <div><h1 className="font-display text-3xl mb-6">Edit {book.title}</h1>
