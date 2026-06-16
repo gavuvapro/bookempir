@@ -15,7 +15,7 @@ export default async function BlogPage() {
         <div className="container py-16 md:py-20">
           <p className="text-sm uppercase tracking-widest text-amber-600 dark:text-amber-400 mb-3 flex items-center gap-2">
             <PenLine size={16} />
-            Journal
+            Blog
           </p>
           <h1 className="font-display text-4xl md:text-5xl">
             Thoughts & Insights

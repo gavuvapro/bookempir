@@ -18,7 +18,7 @@ export function Header(){
         </Link>
         <nav className="hidden md:flex gap-8 text-sm text-muted-foreground">
           <Link href="/books">Books</Link>
-          <Link href="/blog">Journal</Link>
+          <Link href="/blog">Blog</Link>
           <Link href="/about">About</Link>
           <Link href="/contact">Contact</Link>
         </nav>
