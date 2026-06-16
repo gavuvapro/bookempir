@@ -5,6 +5,6 @@ export async function sendEmail(to: string, subject: string, html: string){
   await resend.emails.send({ from: process.env.EMAIL_FROM || "hello@example.com", to, subject, html })
 }
 export const emails = {
-  welcome: (name:string)=> `<h2>Welcome, ${name}!</h2><p>Thanks for joining Authora.</p>`,
+  welcome: (name:string)=> `<h2>Welcome, ${name}!</h2><p>Thanks for joining BookEmpir.</p>`,
   orderConfirmation: (orderNumber:string)=> `<p>Your order ${orderNumber} is confirmed. Thank you!</p>`
 }

@@ -1,10 +1,11 @@
 export const siteConfig = {
-  name: "Authora",
-  author: "Elena Vance",
-  description: "Premium books on design, craft, and creative living — by Elena Vance.",
+  name: "BookEmpir",
+  author: "Fabrice Ishimwe",
+  description: "Premium books on design, craft, and creative living — by Fabrice Ishimwe.",
+  email: "fabriceishimwe@proton.me",
   url: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
   links: {
-    twitter: "https://twitter.com",
-    instagram: "https://instagram.com"
+    email: "mailto:fabriceishimwe@proton.me",
+    instagram: "https://www.instagram.com/bookempir/"
   }
 }

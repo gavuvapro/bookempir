@@ -5,7 +5,7 @@ export default async function AdminLayout({ children }:{ children:React.ReactNod
   return (
     <div className="min-h-screen grid md:grid-cols-[240px_1fr]">
       <aside className="border-r bg-card p-6">
-        <div className="font-display text-xl mb-6">Authora CMS</div>
+        <div className="font-display text-xl mb-6">BookEmpir CMS</div>
         <nav className="space-y-3 text-sm">
           <Link className="block" href="/admin">Dashboard</Link>
           <Link className="block" href="/admin/books">Books</Link>
